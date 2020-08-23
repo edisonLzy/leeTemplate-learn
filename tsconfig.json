@@ -1,0 +1,18 @@
+{
+    "compileOptions": {
+        "outDir": "./dist", //使用ts-loader打包的输出目录
+        "module": "es6", //使用es modules的模块化规范
+        "target": "esnext", //打包输出的代码转换为 es5的代码
+        "allowJs": true, //允许在ts文件中引入js文件
+        "downlevelIteration": true,
+        "declaration": true, //自动生成 声明文件
+        "declarationDir": "./dist/types/", // 声明文件打包的位置
+        "sourceMap": true, // 自动生成sourceMap
+        "types": [
+            "webpack-env"
+        ],
+        "lib": [
+            "esnext",
+          ]
+    },
+}
