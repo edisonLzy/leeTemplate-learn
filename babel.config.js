@@ -1,11 +1,22 @@
 module.exports = (api) => {
     // Cache configuration is a required option
-    api.cache(false);
+    // api.cache(false);
   
     const presets = [
-      "@babel/preset-typescript",
-      "@babel/preset-env"
+      ["@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3,
+        "modules": "umd" 
+      }
+    ],
+    "@babel/preset-typescript"
     ];
-  
-    return { presets };
+     
+  const plugins = [];
+    if (api.env("production")) {
+      plugins.push("babel-plugin-transform-remove-console");
+    }
+
+    return { presets,plugins };
 };

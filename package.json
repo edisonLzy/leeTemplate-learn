@@ -2,10 +2,9 @@
   "name": "leeTemplate-ts",
   "version": "1.0.0",
   "description": "dev enviroment with typescript",
-  "main": "./dist/library.js",
   "scripts": {
     "start": "webpack-dev-server --colors --config ./build/webpack.dev.js",
-    "build": "webpack --colors --config ./build/webpack.prod.js",
+    "build": "NODE_ENV=production webpack --colors --config ./build/webpack.prod.js",
     "mocha": "mocha"
   },
   "keywords": [
@@ -16,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.4.1",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.9.0",
@@ -28,9 +28,12 @@
     "@typescript-eslint/eslint-plugin": "^3.7.1",
     "@typescript-eslint/parser": "^3.7.1",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "chai": "^4.2.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.0.3",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.1.0",
     "cz-conventional-changelog": "^3.2.0",
     "cz-customizable": "^6.2.1",
@@ -65,5 +68,9 @@
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "regenerator-runtime": "^0.13.7"
   }
 }

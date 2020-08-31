@@ -6,7 +6,7 @@ const prodConfig = {
     mode:'production',
     output:{
         path:path.resolve(__dirname,'../dist'),
-        filename: '[name]/js/[name].[contentHash:8].js',
+        filename: '[name]/js/[name].[contentHash:5].js',
     },
     plugins:[
         new CleanWebpackPlugin({

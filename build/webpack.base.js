@@ -32,7 +32,27 @@ function makeHtmlWebpackPlugin(root,excludes = [],template = 'index.html'){
 		title:item,
 		filename:`${item}/index.html`,
 		template:path.resolve(root, item,'index.html'),
-		chunks:['utils',item]
+		chunks:['utils',item],
+		minify: {
+			// 清除html中的注释
+			removeComments: true,
+			// 清理html中的空格、换行符
+			collapseWhitespace: true,
+			// 删除过剩的属性
+			removeRedundantAttributes: true,
+			useShortDoctype: true,
+			// 清理内容为空的元素
+			removeEmptyAttributes: true,
+			// 去掉style和link标签的type属性
+			removeStyleLinkTypeAttributes: true,
+
+			keepClosingSlash: true,
+			// 压缩script中的js代码
+			minifyJS: true,
+			// 压缩style中的css代码
+			minifyCSS: true,
+			minifyURLs: true,
+		}
 	}
 	acc.push(new HtmlWebpackPlugin(op))
 	return acc;
@@ -40,7 +60,6 @@ function makeHtmlWebpackPlugin(root,excludes = [],template = 'index.html'){
 }
 module.exports = {
 	context: root,
-	
 	entry: {
 		utils:'./src/utils/index.ts',
 		...makeEntry(srcPath,["utils"])
@@ -56,8 +75,13 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
-				use: ["babel-loader","ts-loader",],
+				test: /\.ts(x?)$/,
+				use:[{
+					loader: "babel-loader",
+					options:{
+						cacheDirectory: true
+					}
+				},"ts-loader"],
 				exclude: /node_modules/
 			},
 			// 处理图片
@@ -89,9 +113,7 @@ module.exports = {
 
 			},
 			{
-
 				test:/\.html$/,
-				
 				loader:"html-loader"
 				
 			}
